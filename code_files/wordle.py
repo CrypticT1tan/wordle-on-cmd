@@ -21,6 +21,9 @@ class Wordle:
         self.window.title("Wordle")
         self.window.config(bg="white")
 
+        # Center window
+        self.center_window()
+        
         # Title
         title_frame = tk.Frame(self.window)
         title_frame.grid(row=0, column=0)
@@ -40,7 +43,6 @@ class Wordle:
         self.guess_entry.grid(row=0, column=0)
         self.guess_entry.bind("<Return>", self.check_guess) # When pressing the Enter key, run the check_guess function
         self.guess_entry.focus_set() # Automatically have the cursor in the guess entry field
-
         # Wordle Guess Result Layout
         self.guess_results = []
         results_frame = tk.Frame(self.window)
@@ -54,7 +56,6 @@ class Wordle:
                 result_square.grid(row=0, column=j, padx=2)
                 row_list.append(result_square)
             self.guess_results.append(row_list)
-
         # Letter Layout
         letters = [["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
                    ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -69,20 +70,34 @@ class Wordle:
                 key_label = tk.Label(key_row, font=(self.font, self.letter_size), text=letters[i][j], bg=self.bg_color)
                 key_label.grid(row=0, column=j)
             self.key_rows.append(key_row)
-
         # Play Again Button
         play_again = tk.Button(self.window, text="Play Again", justify="center", font=(self.font, self.button_size),
                                highlightbackground=self.bg_color, bg=self.bg_color, width=10, command=self.play_again)
         play_again.grid(row=5, column=0)
-
         # Additional Attributes for Wordle
         self.word_list = word_list
         self.guess_count = 0
         self.guessed_words = []
         self.target_word = self.pick_word()
 
-        # print(self.target_word) # TODO: Delete after testing
-
+    def center_window(self):
+        """
+        Centers the root window using the screen size and window size
+        """
+        # Screen dimensions
+        screen_width = self.window.winfo_screenwidth()
+        screen_height = self.window.winfo_screenheight()
+        # Window dimensions
+        window_width = 400
+        window_height = 680
+        # (x,y) starts at top left of window (0, 0)
+        # x increases moving right, decreases moving left
+        # y increases moving down, decreases moving up
+        x = screen_width / 2 - window_width / 2  # position top left corner's x at this x
+        y = screen_height / 2 - window_height  # position top left corner's y at a smaller y (otherwise window too low)
+        self.window.geometry(
+            "%dx%d+%d+%d" % (window_width, window_height, x, y))  # Adds x and y offsets to window dims
+        self.window.resizable(width=False, height=False)  # Prevent window from being resizable
 
     def pick_word(self) -> str:
         """
@@ -98,7 +113,6 @@ class Wordle:
         :param event: the event that will result in the guess being recorded
         :return:
         """
-        # print(self.target_word) # TODO: Delete after testing
         guess_word = self.guess_entry.get().upper() # Get the guess word from text entry
 
         # If the user's guess is 5 letters long, in the word list, not already guessed, and has made less than 6 guesses
@@ -127,8 +141,6 @@ class Wordle:
                 self.guess_entry.config(fg="green")
             self.guess_entry.config(state="readonly")
 
-        # print(self.guessed_words) # TODO: Delete after testing
-
     def play_again(self) -> None:
         """
         Resets the Wordle game so the user can play again
@@ -139,17 +151,14 @@ class Wordle:
         self.guess_entry.config(state="normal", fg="black") # User can make guesses again, reset font color to black
         self.guess_entry.delete(0, tk.END) # Clear the guess entry
         self.target_word = self.pick_word() # Pick another random word
-
         # Reset the key display (red letters back to black)
         for key_row in self.key_rows:
             for key_label in key_row.winfo_children():
                 key_label.config(fg="black")
-
         # Reset guess result squares
         for i in range(0, 6):
             for j in range(0, 5):
                 self.guess_results[i][j].config(text="", bg="white")
-
 
     def get_guess_results(self, guess) -> None:
         """
@@ -159,10 +168,9 @@ class Wordle:
         # To more easily compare guess with target (char by char)
         target_chars = [char for char in self.target_word]
         guess_chars = [char for char in guess]
-
         # Display the letters of the guess word onto the current result row
-        for i in range(0, 5): self.guess_results[self.guess_count][i].config(text=guess[i])
-
+        for i in range(0, 5):
+            self.guess_results[self.guess_count][i].config(text=guess[i])
         # Making green squares
         for j in range(0, 5):
             # If the guess char is the same as the target char in the current position
@@ -176,7 +184,6 @@ class Wordle:
                         if key_label.cget("text") == guess[j]:
                             key_label.config(fg="green")
                 guess_chars[j], target_chars[j] = "", "" # Make the letter from both words blank
-
         # Making yellow squares
         for k in range(0, 5):
             if guess_chars[k] in target_chars and guess_chars[k] != "":
@@ -190,7 +197,6 @@ class Wordle:
                             key_label.config(fg="#FBC901")
                 target_chars[target_chars.index(guess_chars[k])] = "" # Make the letter in target word blank first
                 guess_chars[k] = "" # Then make this character blank
-
         # Making white squares and marking letters not in target
         for l in range(0, 5):
             if guess_chars[l] != "" and guess_chars[l] not in self.target_word:
@@ -200,5 +206,4 @@ class Wordle:
                         # Check if the key matches the letter
                         if key_label.cget("text") == guess[l]:
                             key_label.config(fg="white") # White background, so the letter appears invisible
-        # print(target_chars, guess_chars) # TODO: Delete after testing
 
