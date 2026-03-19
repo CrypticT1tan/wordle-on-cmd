@@ -5,7 +5,6 @@ import random
 import tkinter as tk
 from tkinter import messagebox
 
-
 class Wordle:
     def __init__(self, word_list):
         # Style attributes
@@ -15,27 +14,22 @@ class Wordle:
         self.letter_size = 30
         self.button_size = 20
         self.bg_color = "white"
-
         # Setup window
         self.window = tk.Tk()
         self.window.title("Wordle")
         self.window.config(bg="white")
-
         # Center window
         self.center_window()
-        
         # Title
         title_frame = tk.Frame(self.window)
         title_frame.grid(row=0, column=0)
         title = tk.Label(title_frame, text="WORDLE", font=(self.font, self.title_size, "bold"),
                          justify="center", bg=self.bg_color)
         title.grid(row=0, column=0)
-
         # Create a separator between title and guess entry
         separator = tk.Frame(self.window, relief="solid", width=400, height=2,
                              highlightbackground="black", highlightthickness=5)
         separator.grid(row=1, column=0)
-
         # Guess Entry
         guess_entry_frame = tk.Frame(self.window)
         guess_entry_frame.grid(row=2, column=0, pady=10)
@@ -111,10 +105,8 @@ class Wordle:
         """
         Get and check the user's guess for what the target word is
         :param event: the event that will result in the guess being recorded
-        :return:
         """
         guess_word = self.guess_entry.get().upper() # Get the guess word from text entry
-
         # If the user's guess is 5 letters long, in the word list, not already guessed, and has made less than 6 guesses
         if len(guess_word) == 5 and guess_word in self.word_list and guess_word not in self.guessed_words and self.guess_count < 6:
             # Accept the user's guess and show them the results
@@ -129,7 +121,6 @@ class Wordle:
             messagebox.showerror(message="Guess is NOT a valid word.")
         else:
             messagebox.showerror(message="You've already guessed this word.")
-
         # Game is over once the user makes 6 guesses or gets the word
         if self.guess_count == 6 or guess_word == self.target_word:
             if self.guess_count == 6 and guess_word != self.target_word:
