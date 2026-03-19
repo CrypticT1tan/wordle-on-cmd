@@ -105,7 +105,6 @@ class Wordle:
         """
         Get and check the user's guess for what the target word is
         :param event: the event that will result in the guess being recorded
-        :return:
         """
         guess_word = self.guess_entry.get().upper() # Get the guess word from text entry
         # If the user's guess is 5 letters long, in the word list, not already guessed, and has made less than 6 guesses
