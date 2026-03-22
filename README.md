@@ -11,7 +11,7 @@ pip install pyinstaller
 
 ## Usage
 
-To build the executable file, use the terminal to go into the same directory as the main.py file and run the command below (replace :
+To build the executable file, use the terminal to go into the same directory as the main.py file and run the command below:
 
 ```bash
 pyinstaller main.py --hidden-import=tkinter --onefile --windowed --add-data "../assets:assets" --icon=../assets/wordle.icns --name "Wordle"
