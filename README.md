@@ -25,4 +25,4 @@ Yellow 🟨 means the letter is in the mystery word but is also misplaced.
 White ⬜ means the letter isn't in the mystery word at all.  
 
 ## CONTACT 📞
-For any questions, contact me at gavinkiosco@gmail.com or CrypticT1tan on GitHub.
+For any questions, contact me at gavinkiosco@gmail.com via email or cryptict1tan on Discord.
