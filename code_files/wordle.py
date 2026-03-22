@@ -20,59 +20,23 @@ class Wordle:
         self.window.config(bg="white")
         # Center window
         self.center_window()
-        # Title
-        title_frame = tk.Frame(self.window)
-        title_frame.grid(row=0, column=0)
-        title = tk.Label(title_frame, text="WORDLE", font=(self.font, self.title_size, "bold"),
-                         justify="center", bg=self.bg_color)
-        title.grid(row=0, column=0)
-        # Create a separator between title and guess entry
-        separator = tk.Frame(self.window, relief="solid", width=400, height=2,
-                             highlightbackground="black", highlightthickness=5)
-        separator.grid(row=1, column=0)
-        # Guess Entry
-        guess_entry_frame = tk.Frame(self.window)
-        guess_entry_frame.grid(row=2, column=0, pady=10)
-        self.guess_entry = tk.Entry(guess_entry_frame, width=8, font=(self.font, self.entry_size), justify="center")
-        self.guess_entry.grid(row=0, column=0)
-        self.guess_entry.bind("<Return>", self.check_guess) # When pressing the Enter key, run the check_guess function
-        self.guess_entry.focus_set() # Automatically have the cursor in the guess entry field
-        # Wordle Guess Result Layout
+        # Game Components
+        self.guess_entry = None
         self.guess_results = []
-        results_frame = tk.Frame(self.window)
-        results_frame.grid(row=3, column=0)
-        for i in range(0, 6):
-            result_row = tk.Frame(results_frame, bg=self.bg_color, padx=30, pady=2)
-            result_row.grid(row=i, column=0)
-            row_list = []
-            for j in range(0, 5):
-                result_square = tk.Label(result_row, bg=self.bg_color, width=6, height=3, relief="solid")
-                result_square.grid(row=0, column=j, padx=2)
-                row_list.append(result_square)
-            self.guess_results.append(row_list)
-        # Letter Layout
-        letters = [["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+        self.letters = [["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
                    ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
                    ["Z", "X", "C", "V", "B", "N", "M"]]
         self.key_rows = []
-        key_frame = tk.Frame(self.window, bg=self.bg_color)
-        key_frame.grid(row=4, column=0)
-        for i in range(0, len(letters)):
-            key_row = tk.Frame(key_frame)
-            key_row.grid(row=i, column=0)
-            for j in range(0, len(letters[i])):
-                key_label = tk.Label(key_row, font=(self.font, self.letter_size), text=letters[i][j], bg=self.bg_color)
-                key_label.grid(row=0, column=j)
-            self.key_rows.append(key_row)
-        # Play Again Button
-        play_again = tk.Button(self.window, text="Play Again", justify="center", font=(self.font, self.button_size),
-                               highlightbackground=self.bg_color, bg=self.bg_color, width=10, command=self.play_again)
-        play_again.grid(row=5, column=0)
-        # Additional Attributes for Wordle
         self.word_list = word_list
         self.guess_count = 0
         self.guessed_words = []
         self.target_word = self.pick_word()
+        # Setup frames for game window
+        self.setup_frames()
+        # Play Again Button
+        play_again = tk.Button(self.window, text="Play Again", justify="center", font=(self.font, self.button_size),
+                               highlightbackground=self.bg_color, bg=self.bg_color, width=10, command=self.play_again)
+        play_again.grid(row=5, column=0)
 
     def center_window(self):
         """
@@ -92,6 +56,72 @@ class Wordle:
         self.window.geometry(
             "%dx%d+%d+%d" % (window_width, window_height, x, y))  # Adds x and y offsets to window dims
         self.window.resizable(width=False, height=False)  # Prevent window from being resizable
+
+    def setup_frames(self) -> None:
+        """
+        Sets up the frames for the game window
+        """
+        self.setup_title_frame()
+        self.setup_guess_entry()
+        self.setup_guess_results()
+        self.setup_letter_frame()
+
+    def setup_title_frame(self) -> None:
+        """
+        Sets up the title for the game window
+        """
+        title_frame = tk.Frame(self.window)
+        title_frame.grid(row=0, column=0)
+        title = tk.Label(title_frame, text="WORDLE", font=(self.font, self.title_size, "bold"),
+                         justify="center", bg=self.bg_color)
+        title.grid(row=0, column=0)
+        # Create a separator between title and guess entry
+        separator = tk.Frame(self.window, relief="solid", width=400, height=2,
+                             highlightbackground="black", highlightthickness=5)
+        separator.grid(row=1, column=0)
+
+    def setup_guess_entry(self) -> None:
+        """
+        Sets up the guess entry frame for the game window
+        """
+        guess_entry_frame = tk.Frame(self.window)
+        guess_entry_frame.grid(row=2, column=0, pady=10)
+        self.guess_entry = tk.Entry(guess_entry_frame, width=8, font=(self.font, self.entry_size), justify="center")
+        self.guess_entry.grid(row=0, column=0)
+        self.guess_entry.bind("<Return>", self.check_guess)  # When pressing the Enter key, run the check_guess function
+        self.guess_entry.focus_set()  # Automatically have the cursor in the guess entry field
+
+    def setup_guess_results(self) -> None:
+        """
+        Sets up the guess results frame for the game window
+        :return:
+        """
+        results_frame = tk.Frame(self.window)
+        results_frame.grid(row=3, column=0)
+        for i in range(0, 6):
+            result_row = tk.Frame(results_frame, bg=self.bg_color, padx=30, pady=2)
+            result_row.grid(row=i, column=0)
+            row_list = []
+            for j in range(0, 5):
+                result_square = tk.Label(result_row, bg=self.bg_color, width=6, height=3, relief="solid")
+                result_square.grid(row=0, column=j, padx=2)
+                row_list.append(result_square)
+            self.guess_results.append(row_list)
+
+    def setup_letter_frame(self) -> None:
+        """
+        Sets up the letter frame for the game window
+        """
+        key_frame = tk.Frame(self.window, bg=self.bg_color)
+        key_frame.grid(row=4, column=0)
+        for i in range(0, len(self.letters)):
+            key_row = tk.Frame(key_frame)
+            key_row.grid(row=i, column=0)
+            for j in range(0, len(self.letters[i])):
+                key_label = tk.Label(key_row, font=(self.font, self.letter_size), text=self.letters[i][j],
+                                     bg=self.bg_color)
+                key_label.grid(row=0, column=j)
+            self.key_rows.append(key_row)
 
     def pick_word(self) -> str:
         """
