@@ -9,10 +9,6 @@ class Wordle:
     def __init__(self, word_list):
         # Style attributes
         self.font = "Helvectica"
-        self.title_size = 55
-        self.entry_size = 40
-        self.letter_size = 30
-        self.button_size = 20
         self.bg_color = "white"
         # Setup window
         self.window = tk.Tk()
@@ -24,8 +20,8 @@ class Wordle:
         self.guess_entry = None
         self.guess_results = []
         self.letters = [["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-                   ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-                   ["Z", "X", "C", "V", "B", "N", "M"]]
+                        ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+                        ["Z", "X", "C", "V", "B", "N", "M"]]
         self.key_rows = []
         self.word_list = word_list
         self.guess_count = 0
@@ -34,7 +30,7 @@ class Wordle:
         # Setup frames for game window
         self.setup_frames()
         # Play Again Button
-        play_again = tk.Button(self.window, text="Play Again", justify="center", font=(self.font, self.button_size),
+        play_again = tk.Button(self.window, text="Play Again", justify="center", font=(self.font, 20),
                                highlightbackground=self.bg_color, bg=self.bg_color, width=10, command=self.play_again)
         play_again.grid(row=5, column=0)
 
@@ -72,7 +68,7 @@ class Wordle:
         """
         title_frame = tk.Frame(self.window)
         title_frame.grid(row=0, column=0)
-        title = tk.Label(title_frame, text="WORDLE", font=(self.font, self.title_size, "bold"),
+        title = tk.Label(title_frame, text="WORDLE", font=(self.font, 55, "bold"),
                          justify="center", bg=self.bg_color)
         title.grid(row=0, column=0)
         # Create a separator between title and guess entry
@@ -86,7 +82,7 @@ class Wordle:
         """
         guess_entry_frame = tk.Frame(self.window)
         guess_entry_frame.grid(row=2, column=0, pady=10)
-        self.guess_entry = tk.Entry(guess_entry_frame, width=8, font=(self.font, self.entry_size), justify="center")
+        self.guess_entry = tk.Entry(guess_entry_frame, width=8, font=(self.font, 40), justify="center")
         self.guess_entry.grid(row=0, column=0)
         self.guess_entry.bind("<Return>", self.check_guess)  # When pressing the Enter key, run the check_guess function
         self.guess_entry.focus_set()  # Automatically have the cursor in the guess entry field
@@ -94,7 +90,6 @@ class Wordle:
     def setup_guess_results(self) -> None:
         """
         Sets up the guess results frame for the game window
-        :return:
         """
         results_frame = tk.Frame(self.window)
         results_frame.grid(row=3, column=0)
@@ -118,7 +113,7 @@ class Wordle:
             key_row = tk.Frame(key_frame)
             key_row.grid(row=i, column=0)
             for j in range(0, len(self.letters[i])):
-                key_label = tk.Label(key_row, font=(self.font, self.letter_size), text=self.letters[i][j],
+                key_label = tk.Label(key_row, font=(self.font, 30), text=self.letters[i][j],
                                      bg=self.bg_color)
                 key_label.grid(row=0, column=j)
             self.key_rows.append(key_row)
@@ -130,6 +125,22 @@ class Wordle:
         """
         # Picking a random word from the list of words
         return random.choice(self.word_list)
+
+    def check_game_over(self, guess_word) -> None:
+        """
+        Check if the game is over and report the results to the user
+        :param guess_word: the user's guess word
+        """
+        # Game is over once the user makes 6 guesses or gets the word
+        if self.guess_count == 6 or guess_word == self.target_word:
+            if self.guess_count == 6 and guess_word != self.target_word:
+                messagebox.showinfo(message=f"YOU LOSE...\nThe word was {self.target_word}")
+                self.guess_entry.insert(0, self.target_word)
+            else:
+                messagebox.showinfo(message=f"YOU WIN!\nThe word was {self.target_word}\nGuesses: {self.guess_count}/6")
+                self.guess_entry.insert(0, self.target_word)
+                self.guess_entry.config(fg="green")
+            self.guess_entry.config(state="readonly")
 
     def check_guess(self, event) -> None:
         """
@@ -151,16 +162,7 @@ class Wordle:
             messagebox.showerror(message="Guess is NOT a valid word.")
         else:
             messagebox.showerror(message="You've already guessed this word.")
-        # Game is over once the user makes 6 guesses or gets the word
-        if self.guess_count == 6 or guess_word == self.target_word:
-            if self.guess_count == 6 and guess_word != self.target_word:
-                messagebox.showinfo(message=f"YOU LOSE...\nThe word was {self.target_word}")
-                self.guess_entry.insert(0, self.target_word)
-            else:
-                messagebox.showinfo(message=f"YOU WIN!\nThe word was {self.target_word}\nGuesses: {self.guess_count}/6")
-                self.guess_entry.insert(0, self.target_word)
-                self.guess_entry.config(fg="green")
-            self.guess_entry.config(state="readonly")
+        self.check_game_over(guess_word)
 
     def play_again(self) -> None:
         """
@@ -181,17 +183,13 @@ class Wordle:
             for j in range(0, 5):
                 self.guess_results[i][j].config(text="", bg="white")
 
-    def get_guess_results(self, guess) -> None:
+    def make_green(self, guess_chars, target_chars, guess) -> None:
         """
-        Get the results of comparing the user's guess with the target
-        :param guess: the user's word guess
+        Makes green squares and marks the corresponding square letters green if they aren't already
+        :param guess_chars: list of chars in the guess word
+        :param target_chars: list of chars in the target word
+        :param guess: the guess word itself
         """
-        # To more easily compare guess with target (char by char)
-        target_chars = [char for char in self.target_word]
-        guess_chars = [char for char in guess]
-        # Display the letters of the guess word onto the current result row
-        for i in range(0, 5):
-            self.guess_results[self.guess_count][i].config(text=guess[i])
         # Making green squares
         for j in range(0, 5):
             # If the guess char is the same as the target char in the current position
@@ -204,8 +202,15 @@ class Wordle:
                         # Check if the key matches the letter
                         if key_label.cget("text") == guess[j]:
                             key_label.config(fg="green")
-                guess_chars[j], target_chars[j] = "", "" # Make the letter from both words blank
-        # Making yellow squares
+                guess_chars[j], target_chars[j] = "", ""  # Make the letter from both words blank
+
+    def make_yellow(self, guess_chars, target_chars, guess) -> None:
+        """
+        Makes green squares and marks the corresponding square letters yellow if they are white
+        :param guess_chars: list of chars in the guess word
+        :param target_chars: list of chars in the target word
+        :param guess: the guess word itself
+        """
         for k in range(0, 5):
             if guess_chars[k] in target_chars and guess_chars[k] != "":
                 # Make the square at the position yellow
@@ -218,7 +223,13 @@ class Wordle:
                             key_label.config(fg="#FBC901")
                 target_chars[target_chars.index(guess_chars[k])] = "" # Make the letter in target word blank first
                 guess_chars[k] = "" # Then make this character blank
-        # Making white squares and marking letters not in target
+
+    def make_white(self, guess_chars, guess) -> None:
+        """
+        Makes white squares in the current guess result row
+        :param guess_chars: list of chars in the guess word
+        :param guess: the guess word itself
+        """
         for l in range(0, 5):
             if guess_chars[l] != "" and guess_chars[l] not in self.target_word:
                 # Removing the letters from the guess word that are not in the target word at all
@@ -227,4 +238,22 @@ class Wordle:
                         # Check if the key matches the letter
                         if key_label.cget("text") == guess[l]:
                             key_label.config(fg="white") # White background, so the letter appears invisible
+
+    def get_guess_results(self, guess) -> None:
+        """
+        Get the results of comparing the user's guess with the target
+        :param guess: the user's word guess
+        """
+        # To more easily compare guess with target (char by char)
+        target_chars = [char for char in self.target_word]
+        guess_chars = [char for char in guess]
+        # Display the letters of the guess word onto the current result row
+        for i in range(0, 5):
+            self.guess_results[self.guess_count][i].config(text=guess[i])
+        # Making green squares and marking letters in target in right place
+        self.make_green(guess_chars, target_chars, guess)
+        # Making yellow squares and marking letters in target but wrong place
+        self.make_yellow(guess_chars, target_chars, guess)
+        # Making white squares and marking letters not in target
+        self.make_white(guess_chars, guess)
 
