@@ -2,6 +2,12 @@
 A replica of the original Wordle game on The New York Times made by Josh Wardle, made using the Python Tkinter library.
 
 ## INSTALLATION ⚙️
+Clone the repository:
+
+```bash
+git clone https://github.com/CrypticT1tan/wordle.git
+```
+
 Use package manager pip to install the following:
 
 ```bash
