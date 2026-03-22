@@ -162,7 +162,9 @@ class Wordle:
             messagebox.showerror(message="Guess is NOT a valid word.")
         else:
             messagebox.showerror(message="You've already guessed this word.")
-        self.check_game_over(guess_word)
+        self.window.focus_set() # Set focus back to window (messagebox popups move focus out of window)
+        self.guess_entry.focus_set() # Move focus to the guess entry
+        self.check_game_over(guess_word) # Check if the game is over (user guessed the word or 6 guesses used up)
 
     def play_again(self) -> None:
         """
