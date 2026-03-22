@@ -2,14 +2,14 @@
 A replica of the original Wordle game made by Josh Wardle that is now on The New York Times. 
 This replica was made in Python using the Tkinter library.
 
-## INSTALLATION
+## INSTALLATION ⚙️
 Use package manager pip to install the following:
 
 ```bash
 pip install pyinstaller
 ```
 
-## Usage
+## USAGE 🔧
 
 To build the executable file, use the terminal to go into the same directory as the main.py file and run the command below:
 
@@ -26,5 +26,5 @@ Green 🟩 means the letter is in the right spot.
 Yellow 🟨 means the letter is in the mystery word but is also misplaced.  
 White ⬜ means the letter isn't in the mystery word at all.  
 
-## Contact
+## CONTACT 📞
 For any questions, contact me at gavinkiosco@gmail.com or CrypticT1tan on GitHub.
