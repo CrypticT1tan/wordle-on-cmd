@@ -1,6 +1,11 @@
 # WORDLE 🔠
 A replica of the original Wordle game on The New York Times made by Josh Wardle, made using the Python Tkinter library.
 
+## FEATURES 🌟
+- Mechanics of the original Wordle
+- Unlimited play
+- Popups to warn you if your input is too short, too long, or isn't a word
+
 ## INSTALLATION ⚙️
 Clone the repository while in your desired directory:
 
