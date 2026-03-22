@@ -17,7 +17,7 @@ pyinstaller main.py --hidden-import=tkinter --onefile --windowed --add-data "../
 Open up the dist file to find an executable file with your desired name, and open it.
 
 ## USAGE 🔧
-The rules work exactly the same as the Wordle game on The New York Time's website.  
+The rules work exactly the same as the Wordle game on The New York Times website.  
 Input 5-letter word guesses into the entry box to figure out the mystery word within 6 guesses.  
 Press the Enter key to get the results of your guess.  
 Green 🟩 means the letter is in the right spot.  
