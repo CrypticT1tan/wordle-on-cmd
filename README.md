@@ -14,11 +14,13 @@ MacOS:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
+deactivate
 ```
 Windows:
 ```bash
 python -m venv .venv
 .venv\Scripts\activate.bat
+deactivate
 ```
 
 Use package manager pip to install the following:
