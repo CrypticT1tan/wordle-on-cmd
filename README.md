@@ -2,10 +2,23 @@
 A replica of the original Wordle game on The New York Times made by Josh Wardle, made using the Python Tkinter library.
 
 ## INSTALLATION ⚙️
-Clone the repository:
+Clone the repository while in your desired directory:
 
 ```bash
 git clone https://github.com/CrypticT1tan/wordle.git
+```
+
+Create and activate a virtual environment:
+
+MacOS:
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+Windows:
+```bash
+python -m venv .venv
+.venv\Scripts\activate.bat
 ```
 
 Use package manager pip to install the following:
