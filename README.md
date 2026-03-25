@@ -13,39 +13,7 @@ Clone the repository while in your desired directory:
 git clone https://github.com/CrypticT1tan/wordle.git
 ```
 
-Create and activate a virtual environment:
-
-MacOS:
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-Windows:
-```bash
-python -m venv .venv
-.venv\Scripts\activate.bat
-```
-
-Use package manager pip to install the following:
-
-```bash
-pip install pyinstaller
-```
-
-To build the executable file, use the terminal to go into the same directory as the main.py file and run the command below:
-
-MacOS:
-```bash
-pyinstaller main.py --hidden-import=tkinter --onefile --windowed --add-data "../assets:assets" --icon=../assets/wordle.icns --name "Wordle"
-```
-Windows:
-```bash
-pyinstaller main.py --hidden-import=tkinter --onefile --windowed --add-data "../assets;assets" --icon=../assets/wordle.ico --name "Wordle"
-```
-
-Open up the dist file to find an executable file with your desired name, and open it.
-
-To deactivate the virtual environment, just type "deactivate" into the console/terminal.
+You now have all the files needed to run the project.
 
 ## USAGE 🔧
 The rules work exactly the same as the Wordle game on The New York Times website.  
