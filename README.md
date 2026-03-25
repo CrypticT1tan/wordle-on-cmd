@@ -1,5 +1,5 @@
-# WORDLE ON CMD🔠
-A replica of the original Wordle game on The New York Times made by Josh Wardle, made using Python to be played on the command prompt/terminal.
+# WORDLE🔠
+A replica of the original Wordle game on The New York Times made by Josh Wardle, made with the Python Tkinter library.
 
 ## FEATURES 🌟
 - Mechanics of the original Wordle
