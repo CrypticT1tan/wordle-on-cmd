@@ -19,13 +19,11 @@ MacOS:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-deactivate
 ```
 Windows:
 ```bash
 python -m venv .venv
 .venv\Scripts\activate.bat
-deactivate
 ```
 
 Use package manager pip to install the following:
@@ -46,6 +44,8 @@ pyinstaller main.py --hidden-import=tkinter --onefile --windowed --add-data "../
 ```
 
 Open up the dist file to find an executable file with your desired name, and open it.
+
+To deactivate the virtual environment, just type "deactivate" into the console/terminal.
 
 ## USAGE 🔧
 The rules work exactly the same as the Wordle game on The New York Times website.  
