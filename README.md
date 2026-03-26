@@ -19,8 +19,6 @@ git clone https://github.com/CrypticT1tan/wordle.git
 
 Navigate to the repository directory to begin using it.
 
-Make sure you have Python installed before running any of the code in this repository.
-
 ## USAGE 🔧
 To run the game, run the following command while in the repository directory:
 
