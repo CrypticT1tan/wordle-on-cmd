@@ -1,8 +1,5 @@
-# Local Application Imports
 from wordle import Wordle
 
-
-# If this code file is being run as the main one and not imported into another, run the code inside
 if __name__ == "__main__":
     # Open the file of 5-letter words and play the game with it
     with open("words.txt") as word_file:

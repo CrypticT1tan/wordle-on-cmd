@@ -1,7 +1,4 @@
-# Standard Library Imports
 import random
-
-# Third Party Imports
 import tkinter as tk
 from tkinter import messagebox
 
