@@ -32,7 +32,7 @@ Windows:
 python main.py
 ```
 
-**Rules**
+**Rules**  
 Input 5-letter word guesses into the entry box to figure out the mystery word within 6 guesses.  
 Press the Enter key to get the results of your guess.  
 Green 🟩 means the letter is in the right spot.  
