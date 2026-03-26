@@ -16,6 +16,18 @@ git clone https://github.com/CrypticT1tan/wordle.git
 Navigate to the repository directory to begin using it.
 
 ## USAGE 🔧
+To run the game, run the following command in the repository directory:
+
+MacOS:
+```bash
+python3 main.py
+```
+
+Windows:
+```bash
+python main.py
+```
+
 The rules work exactly the same as the Wordle game on The New York Times website.  
 Input 5-letter word guesses into the entry box to figure out the mystery word within 6 guesses.  
 Press the Enter key to get the results of your guess.  
