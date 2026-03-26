@@ -13,7 +13,7 @@ Clone the repository while in your desired directory:
 git clone https://github.com/CrypticT1tan/wordle.git
 ```
 
-You now have all the files needed to run the project.
+Navigate to the repository directory to begin using it.
 
 ## USAGE 🔧
 The rules work exactly the same as the Wordle game on The New York Times website.  
