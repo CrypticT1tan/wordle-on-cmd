@@ -1,7 +1,7 @@
 # WORDLE🔠
 A replica of the original Wordle game on The New York Times made by Josh Wardle, made with the Python Tkinter library.
 
-![Hello](https://img.shields.io/badge/Python-3.10+-yellow)
+![Hello](https://img.shields.io/badge/Python-3.9+-yellow)
 
 ---
 
