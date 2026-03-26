@@ -16,7 +16,7 @@ git clone https://github.com/CrypticT1tan/wordle.git
 Navigate to the repository directory to begin using it.
 
 ## USAGE 🔧
-To run the game, run the following command in the repository directory:
+To run the game, run the following command while in the repository directory:
 
 MacOS:
 ```bash
