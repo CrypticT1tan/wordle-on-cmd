@@ -43,5 +43,5 @@ White ⬜ means the letter isn't in the mystery word at all.
 ## CONTACT 📞
 For any questions, contact me here on Github, at gavinkiosco@gmail.com via email, or cryptict1tan on Discord.
 
-## ATTRIBUTION 
+## ATTRIBUTION ©️
 - Wordle is created by Josh Wardle
