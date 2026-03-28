@@ -44,4 +44,4 @@ White ⬜ means the letter isn't in the mystery word at all.
 For any questions, contact me here on Github, at gavinkiosco@gmail.com via email, or cryptict1tan on Discord.
 
 ## ATTRIBUTION ©️
-- Wordle is created by Josh Wardle
+- Wordle is created by Josh Wardle (Link: https://www.nytimes.com/games/wordle/index.html)
