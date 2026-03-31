@@ -1,6 +1,7 @@
 import random
 import tkinter as tk
 from tkinter import messagebox
+import webbrowser
 
 
 class Wordle:
@@ -10,7 +11,7 @@ class Wordle:
         self.bg_color = "white"
         # Setup window
         self.window = tk.Tk()
-        self.window.title("Wordle")
+        self.window.title("PyWordle")
         self.window.config(bg="white")
         # Center window
         self.center_window()
@@ -66,7 +67,7 @@ class Wordle:
         """
         title_frame = tk.Frame(self.window)
         title_frame.grid(row=0, column=0)
-        title = tk.Label(title_frame, text="WORDLE", font=(self.font, 40, "bold"),
+        title = tk.Label(title_frame, text="PYWORDLE", font=(self.font, 40, "bold"),
                          justify="center", bg=self.bg_color)
         title.grid(row=0, column=0)
         # Create a separator between title and guess entry
@@ -139,6 +140,7 @@ class Wordle:
                 self.guess_entry.insert(0, self.target_word)
                 self.guess_entry.config(fg="green")
             self.guess_entry.config(state="readonly")
+            self.get_word_def() # Pull up the word definition
 
     def check_guess(self, event) -> None:
         """
@@ -257,3 +259,10 @@ class Wordle:
         # Making white squares and marking letters not in target
         self.make_white(guess_chars, guess)
 
+    def get_word_def(self) -> None:
+        """
+        Gets the definition of the target word, if the user desires it
+        """
+        see_word = messagebox.askyesno(message=f"Wanna see the definition for {self.target_word}?")
+        if see_word:
+            webbrowser.open(f"https://www.collinsdictionary.com/us/dictionary/english/{self.target_word}")
