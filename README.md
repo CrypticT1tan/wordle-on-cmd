@@ -2,14 +2,15 @@
 A replica of the original Wordle game on The New York Times made by Josh Wardle and the Wordle Unlimited game, made with the Python Tkinter library.
 
 ![Python](https://img.shields.io/badge/Python-3.7+-yellow)
-![Version](https://img.shields.io/badge/Version-1.0-blue)
+![Version](https://img.shields.io/badge/Version-1.1-blue)
 
 ---
 
 ## FEATURES 🌟
 - Mechanics of the original Wordle
-- Unlimited play
-- Popups to warn you if your input is too short, too long, or isn't a word
+- Unlimited play (unlike Wordle's daily limit)
+- Popups to warn about invalid input
+- Can search up word definition after the game is over
 
 ## INSTALLATION ⚙️
 Clone the repository while in your desired directory:
@@ -45,3 +46,4 @@ For any questions, contact me here on Github, at gavinkiosco@gmail.com via email
 
 ## ATTRIBUTION ©️
 - Wordle by Josh Wardle: https://www.nytimes.com/games/wordle/index.html
+- Collins Online Dictionary: https://www.collinsdictionary.com/us/dictionary/english
