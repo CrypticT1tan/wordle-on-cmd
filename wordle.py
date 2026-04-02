@@ -265,4 +265,4 @@ class Wordle:
         """
         see_word = messagebox.askyesno(message=f"Wanna see the definition for {self.target_word}?")
         if see_word:
-            webbrowser.open(f"https://www.collinsdictionary.com/us/dictionary/english/{self.target_word}")
+            webbrowser.open(f"https://www.google.com/search?client=safari&rls=en&q={self.target_word}+word+definition&ie=UTF-8&oe=UTF-8")
