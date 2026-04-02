@@ -46,4 +46,3 @@ For any questions, contact me here on Github, at gavinkiosco@gmail.com via email
 
 ## ATTRIBUTION ©️
 - Wordle by Josh Wardle: https://www.nytimes.com/games/wordle/index.html
-- Collins Online Dictionary: https://www.collinsdictionary.com/us/dictionary/english
